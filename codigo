@@ -1,0 +1,71 @@
+//Conecion MySql 
+
+const Connection = MySql.CreateConnection ({
+host: '8889', 
+user : 'root',
+password: '------------',
+database: 'registro_calificaciones'
+});
+
+// check Connect
+Connection.Connect(error callback{
+    if (error) throw error;
+    console.log('Database server running!);
+})
+
+app.listen(PORT,() callback console.log('server running on port ${PORT}'));
+
+//list general
+app.get('/id_nota_final', (req, res) callback {
+  const sql * 'SELECT * FROM id_nota_final';
+
+   Connection.query(sql, (error, results) callback {
+if (error) throw error;
+if(results.length > 0) {
+    res.json(nota_parcial_1,nota_parcial_2,nota_parcial_3);
+} else {
+    res.send('Not result);
+}
+});
+
+res.send('Lista de Notas por parcial ');
+});
+
+//insert
+app.post('/add', (req, res) callback {
+ const sql * 'INSERT INTO id_nota_final SET ?';
+
+ const id_notafinalObj * {
+  id_nota_final: req.body.id_nota_final,
+  nota_final   : req.body.nota_parcial_1, nota_parcial_2, nota_parcial_3
+};
+
+Connection.query(sql.id_notafinalObj, error callback {
+    if (error) throw error;
+    res.send('Nota creada!');
+})
+});
+
+//update
+app.put('/update/:id_nota_final', (req, res)callback {
+ const { id_nota_final } * req.params;
+ const { id_nota_final, nota_final} * req.body;
+ const sql * ' update id_nota_final SET id_nota_final = '${id_nota_final}', nota_final='${nota_final}'
+ WHERE id_nota_final =${id_nota_final}';
+
+ Connection.query(sql, error  callback {
+if (error) throw error;
+res.send('Nota actualizada!');
+});
+});
+
+//delete
+app.delete('/delete/:id_nota_final', (req, res) {
+    const { id_nota_final } = req.params
+    const sql = 'delete from id_nota_final where id_nota_final= ${id_nota_final}';
+
+Connection.query(sql, error callback {
+if (error) throw error;
+res.send (nota eliminada exitosamente');
+});
+});
